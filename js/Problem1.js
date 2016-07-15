@@ -5,11 +5,13 @@ var literateMaleTemp = 0,
 	literateFemaleTemp = 0,
 	illiterateMaleTemp = 0,
 	illiterateFemaleTemp = 0;
+	var c=0;
 for (var i = 1; i < s.length; i++) {
     var obj = {};
     var line = s[i].split(",");
-    for (var j = 0; j < top.length; j++) {
+    for (var j = 0; j <1; j++) {
         if (line[4] == "Total" && line[5] == "All ages") {
+        	c=c+1;
             literateMaleTemp = literateMaleTemp + parseInt(line[13]);
             literateFemaleTemp=literateFemaleTemp+parseInt(line[14]);
             illiterateMaleTemp = illiterateMaleTemp + parseInt(line[10]);
@@ -17,6 +19,7 @@ for (var i = 1; i < s.length; i++) {
         }
     }
 }
+console.log(c);
 var result='[{"Total Literate Males":"'+
 			literateMaleTemp+
 			'","Total Literate Females":"'
