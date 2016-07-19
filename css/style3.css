@@ -9,10 +9,10 @@ body {
     stroke: #000;
     shape-rendering: crispEdges;
 }
-
+/*
 .bar {
     fill: steelblue;
-}
+}*/
 .d3-tip{
     padding: 10px;
     background:black;

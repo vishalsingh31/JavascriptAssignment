@@ -1,32 +1,29 @@
-var fs = require('fs');
-var data = fs.readFileSync('../csv/India2011.csv', { encoding: 'utf8' }).toString();
-var s = data.split("\r\n");
-var literateMaleTemp = 0,
-	literateFemaleTemp = 0,
-	illiterateMaleTemp = 0,
-	illiterateFemaleTemp = 0;
-	var c=0;
-for (var i = 1; i < s.length; i++) {
-    var obj = {};
-    var line = s[i].split(",");
-    for (var j = 0; j <1; j++) {
-        if (line[4] == "Total" && line[5] == "All ages") {
-        	c=c+1;
-            literateMaleTemp = literateMaleTemp + parseInt(line[13]);
-            literateFemaleTemp=literateFemaleTemp+parseInt(line[14]);
-            illiterateMaleTemp = illiterateMaleTemp + parseInt(line[10]);
-            illiterateFemaleTemp=illiterateFemaleTemp+parseInt(line[11]);
-        }
-    }
-}
-console.log(c);
-var result='[{"Total Literate Males":"'+
-			literateMaleTemp+
-			'","Total Literate Females":"'
-			+literateMaleTemp+
-			'","Total Illiterate Males":"'
-			+illiterateMaleTemp+
-			'","Total Illiterate Females":"'+
-			illiterateFemaleTemp+
-			'"}]'
-fs.writeFileSync('../json/P1.JSON',result);
+var fs=require('fs');
+var data=fs.readFileSync('../csv/India2011.csv',{encoding:'utf8'}).toString();
+var s=data.split("\r\n");
+var result = [];
+var top=s[0].split(",");
+var status=0;
+  for(var i=1;i<s.length;i++)
+ {
+ 	var obj={};
+ 	var line=s[i].split(",");
+ 	for(var j=0;j<top.length;j++)
+ 	{
+		  if((line[4]=="Total" && line[5]=="All ages"))
+		  {
+		  	obj[top[3]]=line[3];
+		  	obj[top[10]]=line[10];
+		  	obj[top[11]]=line[11];
+		  	obj[top[13]]=line[13];
+		  	obj[top[14]]=line[14];
+		  	status=1;
+		  }
+	  }
+	  if(status==1)
+	  {
+	  	result.push(obj);
+	  	status=0;
+	  }
+ }
+ fs.writeFileSync('../json/P1.JSON',JSON.stringify(result));
