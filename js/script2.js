@@ -1,3 +1,4 @@
+$(document).ready(function(){
 var margin = {
             top: 50,
             right: 20,
@@ -14,7 +15,7 @@ var margin = {
         .rangeRound([height, 0]);
 
     var color = d3.scale.ordinal()
-        .range(["Blue","Brown"]);
+        .range(["Blue","Brown","Green","Yellow"]);
 
     var xAxis = d3.svg.axis()
         .scale(xScale)
@@ -32,7 +33,7 @@ var margin = {
         return "<strong>Population:</strong> <span style='color:red'>" + (d.y1-d.y0) + "</span>";
     });
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#tab2").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -140,3 +141,4 @@ var margin = {
             });
 
     });
+});
